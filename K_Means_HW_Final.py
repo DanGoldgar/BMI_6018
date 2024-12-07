@@ -18,9 +18,6 @@ print(type(arrhythmia_data))
 scaler = StandardScaler()
 arrhythmia_data_norm = pd.DataFrame(scaler.fit_transform(arrhythmia_data))
 
-print(arrhythmia_data.head(5))
-print(arrhythmia_data_norm.head(5))
-
 # Use PCA to reduce dimensions to 2
 pca_num_components = 2
 reduced_data = PCA(n_components=pca_num_components).fit_transform(arrhythmia_data_norm)
@@ -78,4 +75,12 @@ plt.plot()
 plt.title('4 Clusters')
 plt.xlabel('PCA1')
 plt.ylabel('PCA2')
+
+# Add centroids to plot
+centroid_x = model.cluster_centers_[:,0]
+centroid_y = model.cluster_centers_[:,1]
+plt.scatter(x= centroid_x, y= centroid_y, color = 'r')
 plt.show()
+
+print("KMeans Centroids:")
+print(model.cluster_centers_)
